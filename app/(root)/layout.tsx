@@ -16,7 +16,7 @@ const GeneralLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div className="flex flex-grow h-full lg:p-2 gap-x-6">
-        <LeftBar userId={userId} />
+        <LeftBar />
         <div className="relative flex-grow h-full">
           <main className="h-full pb-[80px] overflow-hidden lg:pb-0">
             {children}

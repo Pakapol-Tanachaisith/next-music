@@ -1,15 +1,16 @@
+import { auth } from "@clerk/nextjs";
 import { LeftNav } from "./left-nav";
 import { Library } from "./library";
+import getUserSongs from "@/actions/get-user-songs";
 
-interface LeftBarProps {
-  userId: string | null;
-}
+export const LeftBar = async () => {
+  const { userId } = auth();
+  const songs = await getUserSongs(userId);
 
-export const LeftBar = ({ userId }: LeftBarProps) => {
   return (
     <div className="hidden lg:flex gap-x-3">
       <LeftNav userId={userId} />
-      <Library />
+      <Library songs={songs} />
     </div>
   );
 };
