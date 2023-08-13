@@ -23,7 +23,7 @@ export const BottomBar = ({ userId }: BottomBarProps) => {
   if (!isMounted) return null;
 
   return (
-    <div className="block p-4 lg:hidden">
+    <div className="fixed inset-x-0 bottom-0 block p-4 lg:hidden">
       <nav className="flex items-center justify-around">
         {navItems.map((item) => (
           <Link
