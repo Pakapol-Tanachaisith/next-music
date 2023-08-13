@@ -6,6 +6,7 @@ const getSongById = async (songId: string): Promise<Song | null> => {
   const { userId } = auth();
 
   if (!userId) return null;
+  if (!Number.isInteger(Number(songId))) return null;
 
   const songs = await prismadb.song.findMany({
     where: {
