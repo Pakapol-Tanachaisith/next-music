@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogIn } from "lucide-react";
+import { useEffect, useState } from "react";
+import { UserButton } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
 import { navItems } from "@/constants/nav-items";
-import { UserButton } from "@clerk/nextjs";
 
 interface BottomBarProps {
   userId: string | null;
@@ -14,6 +15,12 @@ interface BottomBarProps {
 
 export const BottomBar = ({ userId }: BottomBarProps) => {
   const pathname = usePathname();
+
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
+
+  if (!isMounted) return null;
 
   return (
     <div className="block p-4 lg:hidden">
