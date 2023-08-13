@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { Song } from "@prisma/client";
 
 import { SongFormData, SongFormSchema } from "@/lib/form-validation";
 import {
@@ -22,7 +23,7 @@ import { AudioUploader } from "@/components/audio-uploader";
 import { Button } from "@/components/ui/button";
 
 interface SongFormProps {
-  initialData?: SongFormData | null;
+  initialData?: Song | null;
 }
 
 export const SongForm = ({ initialData }: SongFormProps) => {
@@ -30,15 +31,13 @@ export const SongForm = ({ initialData }: SongFormProps) => {
 
   const form = useForm<SongFormData>({
     resolver: zodResolver(SongFormSchema),
-    defaultValues: initialData
-      ? initialData
-      : {
-          title: "",
-          artist: "",
-          audioUrl: "",
-          genre: "",
-          imageUrl: "",
-        },
+    defaultValues: {
+      title: initialData?.title || "",
+      artist: initialData?.artist || "",
+      audioUrl: initialData?.audioUrl || "",
+      genre: initialData?.genre || "",
+      imageUrl: initialData?.imageUrl || "",
+    },
   });
 
   const imageUrl = form.getValues("imageUrl");
@@ -48,10 +47,14 @@ export const SongForm = ({ initialData }: SongFormProps) => {
 
   const onSubmit = async (values: SongFormData) => {
     try {
-      await axios.post("/api/songs", values);
+      if (!initialData) {
+        await axios.post("/api/songs", values);
+      } else {
+        await axios.patch(`/api/songs/${initialData.id}`, values);
+      }
       router.refresh();
       router.push("/");
-      toast.success("Song created.");
+      toast.success(initialData ? "Song updated." : "Song created.");
     } catch (error) {
       toast.error("Something went wrong.");
     }
@@ -184,7 +187,7 @@ export const SongForm = ({ initialData }: SongFormProps) => {
           disabled={loading}
           type="submit"
         >
-          Create
+          {initialData ? "Edit" : "Create"}
         </Button>
       </form>
     </Form>
