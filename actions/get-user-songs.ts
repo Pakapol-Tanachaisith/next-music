@@ -1,8 +1,6 @@
 import prismadb from "@/lib/prismadb";
 
-const getUserSongs = async (userId: string | null) => {
-  if (!userId) return [];
-
+const getUserSongs = async (userId: string) => {
   return await prismadb.song.findMany({
     where: {
       userId,
