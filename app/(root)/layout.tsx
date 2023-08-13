@@ -8,18 +8,16 @@ const GeneralLayout = ({ children }: { children: React.ReactNode }) => {
   const { userId } = auth();
 
   return (
-    <div className="flex flex-col h-full overflow-hidden ">
-      <div className="flex flex-grow lg:p-2 gap-x-6">
+    <>
+      <div className="flex flex-grow h-full lg:p-2 gap-x-6">
         <LeftBar userId={userId} />
-        <div className="flex flex-col flex-grow">
-          <main className="flex-grow overflow-y-auto rounded-md bg-neutral-900">
-            {children}
-          </main>
+        <div className="relative flex-grow h-full">
+          <main className="h-full overflow-hidden">{children}</main>
           {/* <Player /> */}
         </div>
       </div>
       <BottomBar userId={userId} />
-    </div>
+    </>
   );
 };
 export default GeneralLayout;
