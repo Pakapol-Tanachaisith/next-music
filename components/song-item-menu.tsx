@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MoreVertical, Trash2, Pencil } from "lucide-react";
@@ -14,6 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/alert-modal";
+import { toast } from "react-hot-toast";
 
 interface SongItemProps {
   title: string;
@@ -24,6 +26,21 @@ export const SongItemMenu = ({ songId, title }: SongItemProps) => {
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const deleteSong = async () => {
+    try {
+      setLoading(true);
+      await axios.delete(`/api/songs/${songId}`);
+      setOpen(false);
+      router.refresh();
+      toast.success("Song deleted.");
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -54,8 +71,8 @@ export const SongItemMenu = ({ songId, title }: SongItemProps) => {
         title="Delete song?"
         description={`This action cannot be undone. Do you will want to delete ${title}`}
         isOpen={open}
-        onChange={() => setOpen(false)}
-        onConfirm={() => {}}
+        disabled={loading}
+        onConfirm={deleteSong}
       />
     </>
   );

@@ -16,7 +16,6 @@ interface AlertModalProps {
   title: string;
   description?: string;
   onCancel?: () => void;
-  onChange: () => void;
   onConfirm: () => void;
   actionLabel?: string;
   cancelLabel?: string;
@@ -28,17 +27,13 @@ export const AlertModal = ({
   onCancel,
   onConfirm,
   title,
-  onChange,
   description,
   actionLabel = "Continue",
   cancelLabel = "Cancel",
   disabled,
 }: AlertModalProps) => {
   return (
-    <AlertDialog
-      open={isOpen}
-      onOpenChange={onChange}
-    >
+    <AlertDialog open={isOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>

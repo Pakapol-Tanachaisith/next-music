@@ -1,13 +1,21 @@
 "use client";
 
-import { SongItem } from "@/components/song-item";
+import { useEffect, useState } from "react";
 import { Song } from "@prisma/client";
+
+import { SongItem } from "@/components/song-item";
 
 interface ManageClientProps {
   songs: Song[];
 }
 
 export const ManageClient = ({ songs }: ManageClientProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => setIsMounted(true), []);
+
+  if (!isMounted) return null;
+
   return (
     <div>
       <h3 className="mb-6 text-2xl font-bold">
