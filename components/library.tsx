@@ -15,7 +15,7 @@ export const Library = async () => {
   return (
     <div className="bg-neutral-900 rounded-md min-w-[300px] flex flex-col">
       <div className="flex items-center justify-between px-3 py-2">
-        <h2>My Songs</h2>
+        <h2>My Songs </h2>
         <Link href="/songs/upload">
           <Button
             variant="ghost"
