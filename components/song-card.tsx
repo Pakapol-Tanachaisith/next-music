@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { Song } from "@prisma/client";
-import { PlayCircle, Heart } from "lucide-react";
+import { PlayCircle, ListPlus } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LikeButton } from "./like-button";
+import { SongCardMenu } from "./song-card-menu";
 
 interface SongCardProps {
   song: Song;
@@ -38,8 +39,11 @@ export const SongCard = ({ song }: SongCardProps) => {
             </Badge>
           )}
         </div>
+
+        {/* ACTIONS */}
         <div className="mt-3 text-right">
-          <LikeButton song={song} />
+          {/* <LikeButton song={song} /> */}
+          <SongCardMenu data={song} />
           <Button
             size="icon"
             variant="ghost"
