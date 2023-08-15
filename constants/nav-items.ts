@@ -4,6 +4,7 @@ import {
   FolderKanban,
   Heart,
   PlusCircle,
+  ListMusic,
 } from "lucide-react";
 
 interface NavItem {
@@ -27,6 +28,11 @@ export const navItems: NavItem[] = [
     label: "Favorites",
     href: "/favorites",
     icon: Heart,
+  },
+  {
+    label: "Playlists",
+    href: "/playlists",
+    icon: ListMusic,
   },
   {
     label: "Upload",
