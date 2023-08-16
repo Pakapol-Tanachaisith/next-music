@@ -6,6 +6,28 @@ interface Params {
   playlistId: string;
 }
 
+export const DELETE = async (req: Request, { params }: { params: Params }) => {
+  try {
+    const { userId } = auth();
+
+    if (!userId) {
+      return new NextResponse("Unauthenticated", { status: 401 });
+    }
+
+    const playlist = await prismadb.playlist.delete({
+      where: {
+        id: params.playlistId,
+        userId,
+      },
+    });
+
+    return NextResponse.json(playlist);
+  } catch (error) {
+    console.log("PLAYLIST_DELETE", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+};
+
 export const PATCH = async (req: Request, { params }: { params: Params }) => {
   try {
     const { userId } = auth();

@@ -37,10 +37,7 @@ export const SongItem = ({ data }: SongItemProps) => {
         </div>
       </div>
       <div className="flex items-center gap-x-4">
-        <SongItemMenu
-          songId={String(data.id)}
-          title={data.title}
-        />
+        <SongItemMenu data={data} />
         <button className="transition text-lime-600 hover:text-lime-400">
           <PlayCircle className="w-8 h-8" />
         </button>

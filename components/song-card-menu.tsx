@@ -18,7 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 
 interface SongCardMenuProps {
   data: Song;
@@ -49,6 +49,12 @@ export const SongCardMenu = ({ data }: SongCardMenuProps) => {
     }
   };
 
+  const onPlaylistClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (!userId) return router.push("/sign-in");
+    playlistModal.onOpen();
+  };
+
   useEffect(() => setIsMounted(true), []);
 
   if (!isMounted) return null;
@@ -71,9 +77,7 @@ export const SongCardMenu = ({ data }: SongCardMenuProps) => {
           <Heart className={cn("w-4 h-4 mr-3", isLiked && "fill-white")} />
           {isLiked ? "Unlike" : "Like"}
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => playlistModal.onOpen({ songId: data.id })}
-        >
+        <DropdownMenuItem onClick={onPlaylistClick}>
           <ListPlus className="w-4 h-4 mr-3" />
           Add to playlist
         </DropdownMenuItem>

@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { Song } from "@prisma/client";
-import { PlayCircle, ListPlus } from "lucide-react";
+import { PlayCircle } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LikeButton } from "./like-button";
 import { SongCardMenu } from "./song-card-menu";
 
 interface SongCardProps {

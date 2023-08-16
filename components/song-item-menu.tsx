@@ -16,14 +16,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/alert-modal";
 import { toast } from "react-hot-toast";
+import { useAuth } from "@clerk/nextjs";
+import { Song } from "@prisma/client";
 
 interface SongItemProps {
-  title: string;
-  songId: string;
+  data: Song;
 }
 
-export const SongItemMenu = ({ songId, title }: SongItemProps) => {
+export const SongItemMenu = ({ data }: SongItemProps) => {
   const router = useRouter();
+  const { userId } = useAuth();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -31,7 +33,7 @@ export const SongItemMenu = ({ songId, title }: SongItemProps) => {
   const deleteSong = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/songs/${songId}`);
+      await axios.delete(`/api/songs/${data.id}`);
       setOpen(false);
       router.refresh();
       toast.success("Song deleted.");
@@ -54,22 +56,24 @@ export const SongItemMenu = ({ songId, title }: SongItemProps) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          <DropdownMenuLabel>{title}</DropdownMenuLabel>
+          <DropdownMenuLabel>{data.title}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash2 className="w-4 h-4 mr-3" />
             Delete
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`/songs/${songId}`)}>
-            <Pencil className="w-4 h-4 mr-3" />
-            Edit
-          </DropdownMenuItem>
+          {data.userId === userId && (
+            <DropdownMenuItem onClick={() => router.push(`/songs/${data.id}`)}>
+              <Pencil className="w-4 h-4 mr-3" />
+              Edit
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
 
       <AlertModal
         title="Delete song?"
-        description={`This action cannot be undone. Do you will want to delete ${title}`}
+        description={`This action cannot be undone. Do you will want to delete ${data.title}`}
         isOpen={open}
         disabled={loading}
         onConfirm={deleteSong}

@@ -6,6 +6,7 @@ import usePlaylistModal from "@/hooks/use-playlist-modal";
 import { Playlist } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/empty";
+import { PlaylistItem } from "@/components/playlist-item";
 
 interface PlaylistsClientProps {
   playlists: Playlist[];
@@ -31,7 +32,15 @@ export const PlaylistsClient = ({ playlists }: PlaylistsClientProps) => {
           imagePath="/assets/playlist.svg"
         />
       ) : (
-        <div>asd</div>
+        <div>
+          <ul className="space-y-5">
+            {playlists.map((playlist) => (
+              <li key={playlist.id}>
+                <PlaylistItem data={playlist} />
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </section>
   );
