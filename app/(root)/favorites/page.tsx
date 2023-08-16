@@ -14,7 +14,7 @@ const FavoritePage = async () => {
   const songs = await getFavoriteSongs(userId);
 
   return (
-    <div className="h-full p-4 overflow-y-scroll rounded-md bg-neutral-900 lg:p-6">
+    <div className="p-4 lg:p-6 page-container no-scrollbar">
       <Heading
         title="Favorite Songs"
         description=""

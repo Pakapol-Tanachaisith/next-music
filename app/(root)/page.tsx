@@ -12,7 +12,7 @@ const HomePage = async () => {
   const songs = await getAllSongs();
 
   return (
-    <div className="h-full overflow-y-scroll rounded-md bg-neutral-900 ">
+    <div className="page-container no-scrollbar">
       <div className="p-4  lg:bg-gradient-to-b lg:p-6 lg:pb-[50px] lg:from-lime-700 lg:to-transparent">
         <Heading
           title="Welcome to Next Music"

@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import getSongById from "@/actions/get-song";
 import { SongForm } from "@/components/forms/song-form";
 import { Heading } from "@/components/heading";
+
+export const metadata: Metadata = {
+  title: "Next Music | Upload",
+};
 
 interface SongPageProps {
   params: {
@@ -12,7 +17,7 @@ const SongPage = async ({ params }: SongPageProps) => {
   const song = await getSongById(params.songId);
 
   return (
-    <div className="h-full p-4 overflow-y-scroll rounded-md bg-neutral-900 lg:p-6">
+    <div className="p-4 page-container no-scrollbar lg:p-6">
       <Heading
         title={song ? "Edit Song" : "Upload Song"}
         description={

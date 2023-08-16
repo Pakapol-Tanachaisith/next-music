@@ -21,7 +21,7 @@ const ManagePage = async () => {
   const songs = await getUserSongs(userId);
 
   return (
-    <div className="h-full p-4 overflow-y-scroll rounded-md bg-neutral-900 lg:p-6">
+    <div className="p-4 lg:p-6 page-container no-scrollbar">
       <Heading
         title="Manage Songs"
         description="Manage your uploaded songs."

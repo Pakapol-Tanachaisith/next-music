@@ -8,6 +8,25 @@ body,
   height: 100%;
 }
 
+.page-container {
+  @apply h-full overflow-y-scroll rounded-md bg-neutral-900;
+}
+
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

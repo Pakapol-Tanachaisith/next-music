@@ -15,13 +15,13 @@ const GeneralLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <div className="flex flex-grow h-full lg:p-2 gap-x-6">
+      <div className="relative flex flex-grow h-full lg:p-2 gap-x-6">
         <LeftBar userId={userId} />
-        <div className="relative flex-grow h-full">
-          <main className="h-full pb-[80px] overflow-hidden lg:pb-0">
+        <div className="relative flex flex-col flex-grow h-full pb-16 lg:pb-0">
+          <main className="flex-grow h-full overflow-hidden lg:pb-0">
             {children}
           </main>
-          {/* <Player /> */}
+          <Player />
         </div>
       </div>
       <BottomBar userId={userId} />

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Song } from "@prisma/client";
 import { PlayCircle } from "lucide-react";
 
+import usePlayerContext from "@/hooks/use-player";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SongCardMenu } from "./song-card-menu";
@@ -13,6 +14,8 @@ interface SongCardProps {
 }
 
 export const SongCard = ({ song }: SongCardProps) => {
+  const { loadSongs } = usePlayerContext();
+
   return (
     <div>
       <div className="relative aspect-square">
@@ -47,6 +50,7 @@ export const SongCard = ({ song }: SongCardProps) => {
             size="icon"
             variant="ghost"
             className="hover:text-lime-400"
+            onClick={() => loadSongs(song)}
           >
             <PlayCircle className="w-6 h-6 text-lime-500" />
           </Button>

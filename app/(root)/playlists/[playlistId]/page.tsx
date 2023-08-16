@@ -29,7 +29,7 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
   }
 
   return (
-    <div className="h-full p-4 overflow-y-scroll rounded-md bg-neutral-900 lg:p-6">
+    <div className="p-4 page-container no-scrollbar lg:p-6">
       <Heading
         title={playlist.name}
         description="manage your playlist."

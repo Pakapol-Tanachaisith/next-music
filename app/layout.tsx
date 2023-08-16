@@ -7,6 +7,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModalProvider } from "@/components/modal-provider";
 import getUserPlaylists from "@/actions/get-user-playlists";
+import { PlayerContextProvider } from "@/contexts/player-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +34,7 @@ export default async function RootLayout({
           >
             <ModalProvider playlists={playlists} />
             <Toaster />
-            {children}
+            <PlayerContextProvider>{children}</PlayerContextProvider>
           </ThemeProvider>
         </body>
       </html>
