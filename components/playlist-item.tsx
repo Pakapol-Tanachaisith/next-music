@@ -1,7 +1,9 @@
 "use client";
 
 import { PlayCircle } from "lucide-react";
+import { MouseEventHandler } from "react";
 
+import usePlayerContext from "@/hooks/use-player";
 import { Playlist } from "@/types";
 import { Button } from "./ui/button";
 import { useRouter } from "next/navigation";
@@ -12,6 +14,12 @@ interface PlaylistItemProps {
 
 export const PlaylistItem = ({ data }: PlaylistItemProps) => {
   const router = useRouter();
+  const { loadSongs } = usePlayerContext();
+
+  const onClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    loadSongs(data.songs);
+  };
 
   return (
     <div
@@ -24,6 +32,7 @@ export const PlaylistItem = ({ data }: PlaylistItemProps) => {
           size="icon"
           variant="ghost"
           className="hover:text-lime-400"
+          onClick={onClick}
         >
           <PlayCircle className="w-8 h-8 text-lime-500" />
         </Button>

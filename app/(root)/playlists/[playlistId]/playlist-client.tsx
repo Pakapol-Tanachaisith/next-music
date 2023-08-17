@@ -1,15 +1,15 @@
 "use client";
 
+import axios from "axios";
 import { useEffect, useState } from "react";
-import { Play, Trash } from "lucide-react";
+import { Play } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
+import usePlayerContext from "@/hooks/use-player";
 import { Playlist } from "@/types";
-import { SongItem } from "@/components/song-item";
 import { Button } from "@/components/ui/button";
 import { AlertModal } from "@/components/alert-modal";
-import axios from "axios";
 import { PlaylistSongItem } from "./playlist-song-item";
 
 interface PlaylistClientProps {
@@ -18,6 +18,7 @@ interface PlaylistClientProps {
 
 export const PlaylistClient = ({ playlist }: PlaylistClientProps) => {
   const router = useRouter();
+  const { loadSongs } = usePlayerContext();
 
   const [isMounted, setIsMounted] = useState(false);
   const [open, setOpen] = useState(false);
@@ -57,7 +58,7 @@ export const PlaylistClient = ({ playlist }: PlaylistClientProps) => {
             >
               Delete Playlist
             </Button>
-            <Button>
+            <Button onClick={() => loadSongs(playlist.songs)}>
               <Play className="w-4 h-4 mr-2" />
               Play
             </Button>

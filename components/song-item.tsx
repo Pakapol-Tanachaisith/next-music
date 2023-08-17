@@ -6,12 +6,15 @@ import { PlayCircle } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { SongItemMenu } from "@/components/song-item-menu";
+import usePlayerContext from "@/hooks/use-player";
 
 interface SongItemProps {
   data: Song;
 }
 
 export const SongItem = ({ data }: SongItemProps) => {
+  const { loadSongs } = usePlayerContext();
+
   return (
     <div className="flex items-center justify-between px-4 py-3 rounded-md bg-neutral-800/20">
       <div className="flex gap-x-3">
@@ -38,7 +41,10 @@ export const SongItem = ({ data }: SongItemProps) => {
       </div>
       <div className="flex items-center gap-x-4">
         <SongItemMenu data={data} />
-        <button className="transition text-lime-600 hover:text-lime-400">
+        <button
+          onClick={() => loadSongs(data)}
+          className="transition text-lime-600 hover:text-lime-400"
+        >
           <PlayCircle className="w-8 h-8" />
         </button>
       </div>

@@ -8,6 +8,7 @@ import { useParams, useRouter } from "next/navigation";
 import { Song } from "@prisma/client";
 import { PlayCircle, Trash } from "lucide-react";
 
+import usePlayerContext from "@/hooks/use-player";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -18,6 +19,7 @@ interface PlaylistSongItemProps {
 export const PlaylistSongItem = ({ data }: PlaylistSongItemProps) => {
   const router = useRouter();
   const { playlistId } = useParams();
+  const { loadSongs } = usePlayerContext();
 
   const [loading, setLoading] = useState(false);
 
@@ -69,6 +71,7 @@ export const PlaylistSongItem = ({ data }: PlaylistSongItemProps) => {
         </Button>
         <button
           disabled={loading}
+          onClick={() => loadSongs(data)}
           className="transition text-lime-600 hover:text-lime-400"
         >
           <PlayCircle className="w-8 h-8" />

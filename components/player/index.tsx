@@ -22,4 +22,3 @@ export const Player = () => {
     </div>
   );
 };
-// 2.494312;

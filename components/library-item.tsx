@@ -3,12 +3,15 @@
 import Image from "next/image";
 import { PlayCircle } from "lucide-react";
 import { Song } from "@prisma/client";
+import usePlayerContext from "@/hooks/use-player";
 
 interface LibraryItem {
   data: Song;
 }
 
 export const LibraryItem = ({ data }: LibraryItem) => {
+  const { loadSongs } = usePlayerContext();
+
   return (
     <div className="relative p-2 transition rounded-md cursor-pointer group hover:bg-neutral-800/50 bg-neutral-800/25">
       <div className="flex gap-x-3">
@@ -27,7 +30,10 @@ export const LibraryItem = ({ data }: LibraryItem) => {
         </div>
       </div>
 
-      <button className="absolute right-4 top-[50%] text-lime-500 hover:text-lime-400 transition opacity-0 group-hover:opacity-100 -translate-y-[50%]">
+      <button
+        className="absolute right-4 top-[50%] text-lime-500 hover:text-lime-400 transition opacity-0 group-hover:opacity-100 -translate-y-[50%]"
+        onClick={() => loadSongs(data)}
+      >
         <PlayCircle size={30} />
       </button>
     </div>

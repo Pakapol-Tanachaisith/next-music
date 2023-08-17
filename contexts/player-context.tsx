@@ -68,6 +68,7 @@ export const PlayerContextProvider = ({
         autoplay: true,
         html5: true,
         loop: songs.length === 1 ? true : false,
+        initialMute: false,
       });
     }
   }, [globalAudioPlayer.load, currentSong, songs]);

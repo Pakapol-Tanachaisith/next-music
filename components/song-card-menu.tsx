@@ -52,7 +52,7 @@ export const SongCardMenu = ({ data }: SongCardMenuProps) => {
   const onPlaylistClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (!userId) return router.push("/sign-in");
-    playlistModal.onOpen();
+    playlistModal.onOpen({ songId: data.id });
   };
 
   useEffect(() => setIsMounted(true), []);

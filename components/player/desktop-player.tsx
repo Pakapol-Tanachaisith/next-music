@@ -25,6 +25,8 @@ export const DesktopPlayer = () => {
     pause,
     seek,
     play,
+    nextSong,
+    prevSong,
   } = usePlayerContext();
 
   const onChange = (values: number[]) => {
@@ -40,6 +42,7 @@ export const DesktopPlayer = () => {
           size="icon"
           variant="ghost"
           disabled={songs.length === 1}
+          onClick={prevSong}
         >
           <SkipBack className="w-5 h-5" />
         </Button>
@@ -58,6 +61,7 @@ export const DesktopPlayer = () => {
           size="icon"
           variant="ghost"
           disabled={songs.length === 1}
+          onClick={nextSong}
         >
           <SkipForward className="w-5 h-5" />
         </Button>
