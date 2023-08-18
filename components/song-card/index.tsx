@@ -7,7 +7,7 @@ import { PlayCircle } from "lucide-react";
 import usePlayerContext from "@/hooks/use-player";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { SongCardMenu } from "./song-card-menu";
+import { Menu } from "./menu";
 
 interface SongCardProps {
   song: Song;
@@ -45,7 +45,7 @@ export const SongCard = ({ song }: SongCardProps) => {
         {/* ACTIONS */}
         <div className="mt-3 text-right">
           {/* <LikeButton song={song} /> */}
-          <SongCardMenu data={song} />
+          <Menu data={song} />
           <Button
             size="icon"
             variant="ghost"

@@ -20,11 +20,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-interface SongCardMenuProps {
+interface MenuProps {
   data: Song;
 }
 
-export const SongCardMenu = ({ data }: SongCardMenuProps) => {
+export const Menu = ({ data }: MenuProps) => {
   const router = useRouter();
   const { userId } = useAuth();
   const playlistModal = usePlaylistModal();
@@ -57,7 +57,7 @@ export const SongCardMenu = ({ data }: SongCardMenuProps) => {
 
   useEffect(() => setIsMounted(true), []);
 
-  if (!isMounted) return null;
+  if (!isMounted || !userId) return null;
 
   return (
     <DropdownMenu>
