@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider, auth } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
+import { dark } from "@clerk/themes";
 
 import "./globals.css";
+import getUserPlaylists from "@/actions/get-user-playlists";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ModalProvider } from "@/components/modal-provider";
-import getUserPlaylists from "@/actions/get-user-playlists";
 import { PlayerContextProvider } from "@/contexts/player-context";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +26,15 @@ export default async function RootLayout({
   const playlists = await getUserPlaylists(userId);
 
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark,
+        variables: {
+          colorPrimary: "#a3e635",
+          colorTextOnPrimaryBackground: "#0a0a0a",
+        },
+      }}
+    >
       <html lang="en">
         <body className={inter.className}>
           <ThemeProvider
