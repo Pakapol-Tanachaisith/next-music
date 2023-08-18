@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { auth } from "@clerk/nextjs";
 
 import { BottomBar } from "@/components/bottombar";
-import { LeftBar } from "@/components/leftbar";
+import { LeftBar } from "@/components/left-bar";
 import { Player } from "@/components/player";
 
 export const metadata: Metadata = {
