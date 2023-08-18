@@ -1,4 +1,4 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import getPlaylist from "@/actions/get-playlist";
@@ -11,20 +11,8 @@ interface PlaylistPageProps {
   };
 }
 
-export const generateMetadata = async (
-  { params }: PlaylistPageProps,
-  parent?: ResolvingMetadata
-): Promise<Metadata> => {
-  const playlist = await getPlaylist(params.playlistId);
-  if (playlist) {
-    return {
-      title: `Next Music | ${playlist?.name}`,
-    };
-  } else {
-    return {
-      title: "Next Music | Playlist",
-    };
-  }
+export const metadata: Metadata = {
+  title: "Next Music | Playlist",
 };
 
 const PlaylistPage = async ({ params }: PlaylistPageProps) => {
