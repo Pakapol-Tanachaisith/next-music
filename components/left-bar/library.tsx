@@ -3,9 +3,10 @@ import { Plus } from "lucide-react";
 import { auth } from "@clerk/nextjs";
 
 import getUserSongs from "@/actions/get-user-songs";
-import { LibraryItem } from "./library-item";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { LibraryItem } from "./library-item";
+import { EmptyLibrary } from "./empty-library";
 
 export const Library = async () => {
   const { userId } = auth();
@@ -27,14 +28,18 @@ export const Library = async () => {
       </div>
       <Separator />
       <div className="flex-grow px-3 py-2 overflow-y-auto">
-        <ul className="space-y-3">
-          {songs.map((song) => (
-            <LibraryItem
-              key={song.id}
-              data={song}
-            />
-          ))}
-        </ul>
+        {songs.length > 0 ? (
+          <ul className="space-y-3">
+            {songs.map((song) => (
+              <LibraryItem
+                key={song.id}
+                data={song}
+              />
+            ))}
+          </ul>
+        ) : (
+          <EmptyLibrary />
+        )}
       </div>
     </div>
   );
