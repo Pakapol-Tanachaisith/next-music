@@ -16,9 +16,15 @@ export const generateMetadata = async (
   parent?: ResolvingMetadata
 ): Promise<Metadata> => {
   const playlist = await getPlaylist(params.playlistId);
-  return {
-    title: `Next Music | ${playlist?.name}`,
-  };
+  if (playlist) {
+    return {
+      title: `Next Music | ${playlist?.name}`,
+    };
+  } else {
+    return {
+      title: "Next Music | Playlist",
+    };
+  }
 };
 
 const PlaylistPage = async ({ params }: PlaylistPageProps) => {
