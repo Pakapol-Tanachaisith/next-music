@@ -13,10 +13,12 @@ import {
 import { Button } from "@/components/ui/button";
 
 export const VolumeControl = () => {
-  const { volume, setVolume, muted, mute } = usePlayerContext();
+  const { volume, setVolume, muted, mute, playing } = usePlayerContext();
+
+  console.log({ muted, volume, playing });
 
   const Icon = useMemo<LucideIcon>(() => {
-    if (muted) return VolumeX;
+    if (muted === true) return VolumeX;
 
     if (volume > 0.5) return Volume2;
     if (volume > 0 && volume < 0.5) return Volume1;
